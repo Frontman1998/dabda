@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Blood — Dr. B.R. Ambedkar Blood Donors Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1b33; --ink-soft:#14294d;
+    --blood:#af1626; --blood-bright:#e2394a; --blood-deep:#7a0f1c;
+    --paper:#f7f2e8; --paper-dim:#efe7d8;
+    --gold:#c9a227;
+    --text-on-paper:#191307; --text-dim:#5c5344;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--text-on-paper);font-family:'Inter',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2{font-family:'Fraunces',serif;letter-spacing:-.01em;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:500;}
+
+  header{display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;background:var(--ink);}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--paper);}
+  .brand .chakra{width:28px;height:28px;flex-shrink:0;}
+  .brand .logo-img{width:38px;height:38px;flex-shrink:0;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);}
+  .brand-text{display:flex;flex-direction:column;line-height:1.05;}
+  .brand-text b{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;}
+  .brand-text span{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;}
+  header nav{display:flex;gap:24px;align-items:center;}
+  header nav a{color:var(--paper);opacity:.8;font-size:.85rem;font-weight:500;}
+  header nav a:hover{opacity:1;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.85rem;padding:11px 20px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:transform .2s ease, background .2s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--blood);color:#fff;}
+  .btn-primary:hover{background:var(--blood-bright);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+  .page-hero{
+    background:linear-gradient(135deg, var(--blood-deep), var(--blood) 60%, var(--blood-bright));
+    color:#fff;padding:80px 5vw 60px;
+  }
+  .page-hero .eyebrow{color:rgba(255,255,255,.8);margin-bottom:16px;}
+  .page-hero h1{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:600;max-width:700px;margin-bottom:16px;}
+  .page-hero p{max-width:600px;color:rgba(255,255,255,.85);line-height:1.65;font-size:1.02rem;}
+
+  .urgent-banner{
+    background:var(--ink);color:var(--paper);padding:16px 5vw;
+    display:flex;align-items:center;gap:14px;font-size:.88rem;
+  }
+  .urgent-banner .dot{width:8px;height:8px;border-radius:50%;background:var(--blood-bright);flex-shrink:0;box-shadow:0 0 0 4px rgba(226,57,74,.25);}
+  .urgent-banner a{color:var(--gold);font-weight:600;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:70px 5vw 120px;}
+
+  form{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field.full{grid-column:1/-1;}
+  label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);}
+  label .req{color:var(--blood);}
+  input,select,textarea{
+    font-family:'Inter',sans-serif;font-size:.95rem;padding:13px 14px;border-radius:4px;
+    border:1px solid rgba(25,19,7,.22);background:#fff;color:var(--text-on-paper);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  textarea{resize:vertical;min-height:90px;font-family:'Inter',sans-serif;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blood);box-shadow:0 0 0 3px rgba(175,22,38,.12);}
+  small.hint{font-size:.75rem;color:var(--text-dim);}
+  .error-msg{color:var(--blood);font-size:.78rem;display:none;}
+  .field.invalid input,.field.invalid select{border-color:var(--blood);}
+  .field.invalid .error-msg{display:block;}
+
+  .urgency-group{display:flex;gap:10px;flex-wrap:wrap;}
+  .urgency-group label{
+    display:flex;align-items:center;gap:8px;border:1px solid rgba(25,19,7,.2);border-radius:20px;
+    padding:9px 16px;font-family:'Inter',sans-serif;text-transform:none;letter-spacing:normal;font-size:.85rem;
+    cursor:pointer;color:var(--text-on-paper);transition:all .2s ease;
+  }
+  .urgency-group input{width:auto;margin:0;}
+  .urgency-group input:checked + span{font-weight:700;}
+  .urgency-group label:has(input:checked){background:var(--blood);border-color:var(--blood);color:#fff;}
+
+  .submit-row{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:16px;}
+  .submit-note{font-size:.78rem;color:var(--text-dim);max-width:420px;}
+
+  .success{
+    display:none;background:var(--ink);color:var(--paper);border-radius:10px;
+    padding:44px 40px;margin-top:10px;position:relative;overflow:hidden;
+  }
+  .success.show{display:block;}
+  .success::before{content:'';position:absolute;inset:0;background:linear-gradient(140deg, rgba(175,22,38,.25), transparent 60%);}
+  .success > *{position:relative;z-index:1;}
+  .success .eyebrow{color:var(--gold);margin-bottom:14px;}
+  .success h2{font-size:1.7rem;font-weight:600;margin-bottom:8px;}
+  .success p{color:rgba(247,242,232,.7);font-size:.92rem;margin-bottom:26px;max-width:520px;}
+  .id-display{
+    display:inline-flex;align-items:center;gap:16px;background:rgba(247,242,232,.06);
+    border:1px solid rgba(247,242,232,.2);border-radius:8px;padding:18px 26px;margin-bottom:28px;
+  }
+  .id-display .big{font-family:'IBM Plex Mono',monospace;font-size:1.7rem;font-weight:600;letter-spacing:.06em;color:var(--gold);}
+  .notify-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .notify-row a{
+    display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;
+    padding:12px 20px;border-radius:4px;border:1px solid rgba(247,242,232,.3);color:var(--paper);
+  }
+  .notify-row a.whatsapp{background:#25d366;color:#04331b;border-color:#25d366;}
+  .notify-row a:hover{transform:translateY(-2px);}
+
+  footer{background:var(--ink);color:rgba(247,242,232,.5);padding:36px 5vw;text-align:center;font-size:.8rem;}
+  footer a:hover{color:var(--paper);}
+
+  @media (max-width:720px){
+    form{grid-template-columns:1fr;}
+    header nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <img src="assets/logo.jpg" alt="Dr. B.R. Ambedkar Blood Donors Association logo" class="logo-img">
+    <div class="brand-text"><b>Dr. B.R. Ambedkar</b><span>Blood Donors Association</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="register.html">Register as Donor</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="eyebrow">Emergency &amp; scheduled requests</div>
+  <h1>Request blood for a patient</h1>
+  <p>Fill in the details below and we'll start matching against our donor registry immediately. For life-threatening emergencies, submit this form and also use the WhatsApp button that appears next — it reaches us fastest.</p>
+</section>
+
+<div class="urgent-banner">
+  <span class="dot"></span>
+  In a critical emergency right now? Don't wait for a reply — call our helpline directly and fill this form alongside it.
+</div>
+
+<div class="wrap">
+  <form id="requestForm" novalidate>
+    <div class="field">
+      <label>Your name <span class="req">*</span></label>
+      <input type="text" name="requesterName" required placeholder="Person making the request">
+      <span class="error-msg">Please enter your name.</span>
+    </div>
+    <div class="field">
+      <label>Relation to patient <span class="req">*</span></label>
+      <input type="text" name="relation" required placeholder="e.g. Self, Son, Friend">
+      <span class="error-msg">Please tell us your relation to the patient.</span>
+    </div>
+    <div class="field">
+      <label>Patient name <span class="req">*</span></label>
+      <input type="text" name="patientName" required placeholder="Name of the patient">
+      <span class="error-msg">Please enter the patient's name.</span>
+    </div>
+    <div class="field">
+      <label>Blood group needed <span class="req">*</span></label>
+      <select name="bloodGroup" required>
+        <option value="">Select blood group</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option>
+        <option>O+</option><option>O-</option>
+      </select>
+      <span class="error-msg">Please select the required blood group.</span>
+    </div>
+    <div class="field">
+      <label>Units required <span class="req">*</span></label>
+      <input type="number" name="units" min="1" max="20" required placeholder="e.g. 2">
+      <span class="error-msg">Please enter how many units are needed.</span>
+    </div>
+    <div class="field">
+      <label>Your mobile number <span class="req">*</span></label>
+      <input type="tel" name="mobile" required placeholder="10-digit mobile number">
+      <span class="error-msg">Enter a valid 10-digit mobile number.</span>
+    </div>
+    <div class="field">
+      <label>Area / locality <span class="req">*</span></label>
+      <input type="text" name="area" required placeholder="e.g. Model Town">
+      <span class="error-msg">Please enter the area or locality.</span>
+    </div>
+    <div class="field">
+      <label>City <span class="req">*</span></label>
+      <input type="text" name="city" required placeholder="e.g. Jalandhar">
+      <span class="error-msg">Please enter the city.</span>
+    </div>
+    <div class="field">
+      <label>Country <span class="req">*</span></label>
+      <select name="country" required>
+        <option value="">Select country</option>
+        <option>India</option>
+        <option>New Zealand</option>
+        <option>United Kingdom</option>
+        <option>Other</option>
+      </select>
+      <span class="error-msg">Please select a country.</span>
+    </div>
+    <div class="field full">
+      <label>Hospital name <span class="req">*</span></label>
+      <input type="text" name="hospital" required placeholder="Where the patient is admitted">
+      <span class="error-msg">Please enter the hospital name.</span>
+    </div>
+
+    <div class="field full">
+      <label>How urgent is this? <span class="req">*</span></label>
+      <div class="urgency-group">
+        <label><input type="radio" name="urgency" value="Critical — needed now" required><span>Critical — needed now</span></label>
+        <label><input type="radio" name="urgency" value="Needed today"><span>Needed today</span></label>
+        <label><input type="radio" name="urgency" value="Within a few days"><span>Within a few days</span></label>
+      </div>
+      <span class="error-msg" id="urgencyError">Please select an urgency level.</span>
+    </div>
+
+    <div class="field">
+      <label>Emergency contact name <span class="req">*</span></label>
+      <input type="text" name="emName" required placeholder="An alternate contact person">
+      <span class="error-msg">Please enter an emergency contact name.</span>
+    </div>
+    <div class="field">
+      <label>Emergency contact number <span class="req">*</span></label>
+      <input type="tel" name="emMobile" required placeholder="10-digit mobile number">
+      <span class="error-msg">Enter a valid 10-digit emergency contact number.</span>
+    </div>
+
+    <div class="field full">
+      <label>Additional notes</label>
+      <textarea name="notes" placeholder="Anything else that helps a donor or volunteer act fast"></textarea>
+    </div>
+
+    <div class="submit-row">
+      <p class="submit-note">Submitting this form logs your request in our registry and opens a message to our helpline so a human sees it right away.</p>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Submit Request</button>
+    </div>
+  </form>
+
+  <div class="success" id="successPanel">
+    <div class="eyebrow">Request logged</div>
+    <h2>We've received your request, <span id="successName"></span>.</h2>
+    <p>Keep this reference ID handy when you follow up with us. Please also tap the WhatsApp button below now — it sends your details straight to our helpline so a volunteer can start matching donors immediately.</p>
+    <div class="id-display">
+      <div class="big" id="generatedId">—</div>
+    </div>
+    <div class="notify-row">
+      <a href="#" id="whatsappNotify" class="whatsapp" target="_blank" rel="noopener">Send to our helpline on WhatsApp</a>
+      <a href="#" id="emailNotify" style="border:1px solid rgba(247,242,232,.3);">Email us this request</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html">← Back to home</a> · Dr. B.R. Ambedkar Blood Donors Association — Head Office: Jalandhar, Punjab · India · New Zealand · United Kingdom
+</footer>
+
+<script>
+  // ====== EDIT THESE TWO LINES WITH YOUR REAL CONTACT DETAILS ======
+  const ADMIN_EMAIL = "your-email@example.com";
+  const ADMIN_WHATSAPP = "91XXXXXXXXXX"; // country code + number, digits only, no + or spaces
+  // ===================================================================
+
+  function drawSpokes(id){
+    const g = document.getElementById(id); if(!g) return;
+    for(let i=0;i<24;i++){
+      const a=(i/24)*Math.PI*2, x1=50+Math.cos(a)*8, y1=50+Math.sin(a)*8, x2=50+Math.cos(a)*40, y2=50+Math.sin(a)*40;
+      const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x1);line.setAttribute('y1',y1);line.setAttribute('x2',x2);line.setAttribute('y2',y2);line.setAttribute('stroke-width','1.4');
+      g.appendChild(line);
+    }
+  }
+  drawSpokes('spokesNav');
+
+  function onlyDigits(s){ return (s||'').replace(/\D/g,''); }
+
+  async function nextRequestSerial(){
+    try{
+      const cur = localStorage.getItem('request-serial-counter');
+const n = cur ? parseInt(cur, 10) + 1 : 1;
+localStorage.setItem('request-serial-counter', n);
+return n;
+    }catch(e){
+      localStorage.setItem('request-serial-counter', 1);
+    }
+  }
+
+  const form = document.getElementById('requestForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function validateField(field, valid){
+    field.closest('.field') && field.closest('.field').classList.toggle('invalid', !valid);
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = new FormData(form);
+    const requesterName = data.get('requesterName').trim();
+    const relation = data.get('relation').trim();
+    const patientName = data.get('patientName').trim();
+    const bloodGroup = data.get('bloodGroup');
+    const units = parseInt(data.get('units'),10);
+    const mobile = data.get('mobile').trim();
+    const area = data.get('area').trim();
+    const city = data.get('city').trim();
+    const country = data.get('country');
+    const hospital = data.get('hospital').trim();
+    const urgency = data.get('urgency');
+    const emName = data.get('emName').trim();
+    const emMobile = data.get('emMobile').trim();
+    const notes = (data.get('notes')||'').trim();
+
+    let ok = true;
+    ok = validateField(form.requesterName, requesterName.length>1) && ok;
+    ok = validateField(form.relation, relation.length>1) && ok;
+    ok = validateField(form.patientName, patientName.length>1) && ok;
+    ok = validateField(form.bloodGroup, !!bloodGroup) && ok;
+    ok = validateField(form.units, units>=1 && units<=20) && ok;
+    ok = validateField(form.mobile, /^\d{10}$/.test(onlyDigits(mobile))) && ok;
+    ok = validateField(form.area, area.length>1) && ok;
+    ok = validateField(form.city, city.length>1) && ok;
+    ok = validateField(form.country, !!country) && ok;
+    ok = validateField(form.hospital, hospital.length>1) && ok;
+    ok = validateField(form.emName, emName.length>1) && ok;
+    ok = validateField(form.emMobile, /^\d{10}$/.test(onlyDigits(emMobile))) && ok;
+
+    const urgencyErr = document.getElementById('urgencyError');
+    if(!urgency){ urgencyErr.style.display='block'; ok=false; } else { urgencyErr.style.display='none'; }
+
+    if(!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const serial = await nextRequestSerial();
+    const id = 'REQ' + String(serial).padStart(4,'0');
+
+    const record = {
+      id, requesterName, relation, patientName, bloodGroup, units, mobile: onlyDigits(mobile),
+      area, city, country, hospital, urgency, emergencyContactName: emName, emergencyContactMobile: onlyDigits(emMobile),
+      notes, requestedAt: new Date().toISOString()
+    };
+
+    try{
+      await window.storage.set('request:'+id, JSON.stringify(record), true);
+    }catch(err){
+      console.error('Could not save request', err);
+    }
+
+    const summary = `🚨 BLOOD REQUEST — ${urgency}
+Ref: ${id}
+Patient: ${patientName} (${units} unit${units>1?'s':''} of ${bloodGroup})
+Hospital: ${hospital}, ${area}, ${city}, ${country}
+Requested by: ${requesterName} (${relation}) — ${mobile}
+Emergency contact: ${emName} (${emMobile})
+Notes: ${notes || '—'}`;
+
+    document.getElementById('whatsappNotify').href = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(summary)}`;
+    document.getElementById('emailNotify').href = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent('🚨 Blood Request '+id+' — '+bloodGroup+' — '+urgency)}&body=${encodeURIComponent(summary)}`;
+
+    document.getElementById('successName').textContent = requesterName;
+    document.getElementById('generatedId').textContent = id;
+    document.getElementById('successPanel').classList.add('show');
+    document.getElementById('successPanel').scrollIntoView({behavior:'smooth', block:'start'});
+
+    // auto-open WhatsApp right away since speed matters for a blood request
+    window.open(document.getElementById('whatsappNotify').href, '_blank');
+
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit Request';
+  });
+</script>
+</body>
+</html>

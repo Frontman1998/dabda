@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. B.R. Ambedkar Blood Donors Association — Head Office Jalandhar, Punjab</title>
+<meta name="description" content="A community-run blood donor network headquartered in Jalandhar, Punjab, active across India, New Zealand, and the United Kingdom — organising emergency drives, honouring donors, and living Dr. Ambedkar's call to serve.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1b33;
+    --ink-soft:#14294d;
+    --blood:#af1626;
+    --blood-bright:#e2394a;
+    --blood-deep:#7a0f1c;
+    --paper:#f7f2e8;
+    --paper-dim:#efe7d8;
+    --gold:#c9a227;
+    --text-on-paper:#191307;
+    --text-dim:#5c5344;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--blood);color:var(--paper);}
+
+  a{color:inherit;text-decoration:none;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.72rem;
+    font-weight:500;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    line-height:1.02;
+    letter-spacing:-.01em;
+  }
+
+  /* ---------------- NAV ---------------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 5vw;
+    background:linear-gradient(to bottom, rgba(11,27,51,.92), rgba(11,27,51,0));
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(11,27,51,.94);
+    backdrop-filter:blur(10px);
+    padding:14px 5vw;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+  }
+  .brand{
+    display:flex;align-items:center;gap:12px;
+    color:var(--paper);
+  }
+  .brand .chakra{width:30px;height:30px;flex-shrink:0;}
+  .brand .logo-img{width:40px;height:40px;flex-shrink:0;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);}
+  .brand-text{display:flex;flex-direction:column;line-height:1.05;}
+  .brand-text b{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;}
+  .brand-text span{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;}
+
+  nav.links{display:flex;gap:34px;align-items:center;}
+  nav.links a{
+    color:var(--paper);opacity:.82;font-size:.87rem;font-weight:500;
+    position:relative;padding:4px 0;transition:opacity .2s ease;
+  }
+  nav.links a:hover{opacity:1;}
+  nav.links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--blood-bright);
+    transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:.85rem;
+    padding:12px 22px;border-radius:3px;
+    cursor:pointer;border:1px solid transparent;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--blood);color:#fff;
+    box-shadow:0 8px 24px -8px rgba(175,22,38,.7);
+  }
+  .btn-primary:hover{background:var(--blood-bright);box-shadow:0 14px 30px -10px rgba(226,57,74,.8);}
+  .btn-ghost{
+    background:transparent;color:var(--paper);border-color:rgba(247,242,232,.35);
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+  .btn-dark{background:var(--ink);color:var(--paper);}
+  .btn-dark:hover{background:var(--ink-soft);}
+
+  .nav-cta{display:flex;gap:12px;}
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    position:relative;min-height:100vh;
+    background:radial-gradient(120% 90% at 15% 10%, #14294d 0%, #0b1b33 45%, #071224 100%);
+    display:flex;align-items:center;
+    padding:140px 5vw 90px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(247,242,232,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,242,232,.035) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(circle at 30% 40%, black 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+    width:100%;position:relative;z-index:2;
+  }
+  .hero-copy .eyebrow{color:var(--gold);margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+  .hero-copy .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--blood-bright);box-shadow:0 0 0 4px rgba(226,57,74,.25);animation:pulse-dot 1.8s ease infinite;}
+  @keyframes pulse-dot{0%,100%{box-shadow:0 0 0 4px rgba(226,57,74,.25);}50%{box-shadow:0 0 0 8px rgba(226,57,74,.05);}}
+
+  .hero-copy h1{
+    color:var(--paper);
+    font-size:clamp(2.6rem, 5.2vw, 4.6rem);
+    font-weight:600;
+    margin-bottom:26px;
+  }
+  .hero-copy h1 em{font-style:italic;font-weight:500;color:var(--blood-bright);}
+  .hero-copy p.lede{
+    color:rgba(247,242,232,.72);font-size:1.12rem;line-height:1.65;max-width:520px;margin-bottom:38px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;}
+
+  .hero-ticker{
+    display:flex;gap:38px;flex-wrap:wrap;
+    border-top:1px solid rgba(247,242,232,.15);
+    padding-top:26px;
+  }
+  .hero-ticker div{display:flex;flex-direction:column;gap:4px;}
+  .hero-ticker .num{font-family:'IBM Plex Mono',monospace;color:var(--paper);font-size:1.6rem;font-weight:600;}
+  .hero-ticker .lbl{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;}
+
+  .hero-3d{
+    position:relative;height:560px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #drop-canvas{width:100%;height:100%;cursor:grab;}
+  #drop-canvas:active{cursor:grabbing;}
+  .hero-3d-caption{
+    position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(247,242,232,.45);
+    letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  }
+
+  section{position:relative;}
+
+  /* ---------------- MISSION ---------------- */
+  .mission{
+    background:var(--paper);
+    padding:130px 5vw;
+    display:grid;grid-template-columns:.7fr 1.3fr;gap:60px;
+  }
+  .mission-tag{position:sticky;top:120px;align-self:start;}
+  .mission-tag .eyebrow{color:var(--blood);margin-bottom:16px;}
+  .mission-tag .chakra-lg{width:64px;height:64px;opacity:.9;}
+  .mission-quote{
+    font-size:clamp(1.7rem, 3vw, 2.7rem);
+    font-weight:500;font-style:italic;
+    color:var(--ink);
+    line-height:1.32;
+  }
+  .mission-quote .mark{color:var(--blood);font-style:normal;font-weight:700;}
+  .mission-sub{
+    margin-top:34px;font-family:'Inter',sans-serif;font-style:normal;font-size:1.05rem;
+    color:var(--text-dim);max-width:640px;line-height:1.7;
+  }
+  .mission-slogan{
+    margin-top:44px;display:flex;gap:0;font-family:'IBM Plex Mono',monospace;
+    font-size:.85rem;letter-spacing:.05em;color:var(--ink);flex-wrap:wrap;
+  }
+  .mission-slogan span{padding:10px 18px;border:1px solid rgba(25,19,7,.18);border-right:none;}
+  .mission-slogan span:last-child{border-right:1px solid rgba(25,19,7,.18);color:#fff;background:var(--blood);border-color:var(--blood);}
+
+  /* ---------------- STATS ---------------- */
+  .stats{
+    background:var(--ink);
+    padding:100px 5vw;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background-color:rgba(247,242,232,.08);
+  }
+  .stat-card{
+    background:var(--ink);padding:46px 34px;
+    transition:background .3s ease;
+  }
+  .stat-card:hover{background:var(--ink-soft);}
+  .stat-card .num{
+    font-family:'IBM Plex Mono',monospace;font-size:clamp(2.1rem,3.4vw,3rem);
+    color:var(--paper);font-weight:600;margin-bottom:10px;
+    display:flex;align-items:baseline;gap:4px;
+  }
+  .stat-card .num small{font-size:1.1rem;color:var(--gold);}
+  .stat-card .lbl{color:rgba(247,242,232,.6);font-size:.92rem;line-height:1.5;max-width:220px;}
+  .stat-note{
+    grid-column:1/-1;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(247,242,232,.35);
+    padding:18px 34px 0;letter-spacing:.03em;
+  }
+
+  /* ---------------- CAMPS ---------------- */
+  .camps{padding:130px 5vw;background:var(--paper);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:64px;flex-wrap:wrap;}
+  .section-head .eyebrow{color:var(--blood);margin-bottom:14px;}
+  .section-head h2{font-size:clamp(2rem,3.6vw,3rem);color:var(--ink);font-weight:600;max-width:640px;}
+  .section-head p{color:var(--text-dim);max-width:380px;line-height:1.6;font-size:.98rem;}
+
+  .camp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;perspective:1600px;}
+  .camp-card{
+    background:var(--ink);border-radius:6px;padding:34px 30px;color:var(--paper);
+    position:relative;overflow:hidden;
+    transform-style:preserve-3d;
+    transition:transform .12s ease-out, box-shadow .3s ease;
+    box-shadow:0 20px 50px -25px rgba(11,27,51,.6);
+  }
+  .camp-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(140deg, rgba(175,22,38,.25), transparent 55%);
+    opacity:0;transition:opacity .3s ease;
+  }
+  .camp-card:hover::before{opacity:1;}
+  .camp-card:hover{box-shadow:0 30px 60px -20px rgba(175,22,38,.35);}
+  .camp-status{
+    font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:22px;
+  }
+  .camp-status .dot{width:6px;height:6px;border-radius:50%;background:var(--blood-bright);}
+  .camp-card h3{font-size:1.5rem;font-weight:600;margin-bottom:10px;transform:translateZ(30px);}
+  .camp-card .loc{font-size:.85rem;color:rgba(247,242,232,.55);margin-bottom:26px;transform:translateZ(20px);}
+  .camp-meta{display:flex;flex-direction:column;gap:10px;border-top:1px solid rgba(247,242,232,.14);padding-top:20px;transform:translateZ(20px);}
+  .camp-meta div{display:flex;justify-content:space-between;font-size:.82rem;}
+  .camp-meta div span:first-child{color:rgba(247,242,232,.45);}
+  .camp-meta div span:last-child{font-family:'IBM Plex Mono',monospace;}
+  .camp-card .cta-row{margin-top:24px;transform:translateZ(20px);}
+  .camp-card .cta-row a{
+    font-size:.82rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:6px;
+  }
+  .camp-card .cta-row a svg{transition:transform .2s ease;}
+  .camp-card .cta-row a:hover svg{transform:translateX(4px);}
+
+  /* ---------------- PROCESS ---------------- */
+  .process{background:var(--paper-dim);padding:130px 5vw;}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .process-grid::before{
+    content:'';position:absolute;top:34px;left:6%;right:6%;height:1px;
+    background:repeating-linear-gradient(90deg, rgba(25,19,7,.25) 0 8px, transparent 8px 16px);
+    z-index:0;
+  }
+  .process-step{position:relative;padding:0 26px;z-index:1;}
+  .process-step .step-no{
+    width:68px;height:68px;border-radius:50%;background:var(--paper-dim);
+    border:1px solid rgba(25,19,7,.2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:.95rem;color:var(--blood);font-weight:600;
+    margin-bottom:26px;position:relative;background:var(--paper-dim);
+  }
+  .process-step h3{font-size:1.2rem;color:var(--ink);margin-bottom:10px;font-weight:600;}
+  .process-step p{font-size:.9rem;color:var(--text-dim);line-height:1.6;}
+
+  /* ---------------- BLOOD TYPES ---------------- */
+  .network{background:var(--ink);padding:130px 5vw;color:var(--paper);}
+  .network .section-head h2{color:var(--paper);}
+  .network .section-head p{color:rgba(247,242,232,.55);}
+  .network .section-head .eyebrow{color:var(--gold);}
+  .bt-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;}
+  .bt-card{
+    aspect-ratio:1;border-radius:8px;border:1px solid rgba(247,242,232,.14);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:rgba(247,242,232,.03);
+    transition:all .3s ease;cursor:default;
+  }
+  .bt-card:hover{background:var(--blood);border-color:var(--blood);transform:translateY(-6px);}
+  .bt-card .bt{font-family:'Fraunces',serif;font-weight:700;font-size:1.5rem;}
+  .bt-card .lbl{font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);}
+  .bt-card:hover .lbl{color:rgba(247,242,232,.85);}
+
+  /* ---------------- HONOR WALL ---------------- */
+  .honor{padding:130px 5vw;background:var(--paper);}
+  .honor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .honor-card{
+    background:var(--ink-soft);color:var(--paper);border-radius:6px;padding:32px 28px;
+    display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;
+  }
+  .honor-card .quote-mark{font-family:'Fraunces',serif;font-size:3rem;color:var(--blood-bright);line-height:1;opacity:.8;}
+  .honor-card p.quote{font-size:.98rem;line-height:1.65;color:rgba(247,242,232,.85);}
+  .honor-card .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:10px;border-top:1px solid rgba(247,242,232,.12);}
+  .honor-card .avatar{
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(140deg, var(--blood), var(--gold));
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:.9rem;
+  }
+  .honor-card .who .name{font-size:.85rem;font-weight:600;}
+  .honor-card .who .tag{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--gold);letter-spacing:.04em;}
+
+  /* ---------------- MEMBERSHIP CTA ---------------- */
+  .join{
+    padding:140px 5vw;background:linear-gradient(135deg, var(--blood-deep), var(--blood) 60%, var(--blood-bright));
+    color:#fff;text-align:center;position:relative;overflow:hidden;
+  }
+  .join::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,.12) 0, transparent 45%),
+                      radial-gradient(circle at 80% 80%, rgba(255,255,255,.1) 0, transparent 45%);
+  }
+  .join-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;}
+  .join .eyebrow{color:rgba(255,255,255,.75);margin-bottom:20px;}
+  .join h2{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:600;margin-bottom:22px;}
+  .join p{font-size:1.08rem;line-height:1.65;color:rgba(255,255,255,.85);margin-bottom:44px;max-width:560px;margin-left:auto;margin-right:auto;}
+  .join-actions{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  .join .btn-primary{background:#fff;color:var(--blood-deep);box-shadow:0 14px 34px -12px rgba(0,0,0,.35);}
+  .join .btn-primary:hover{background:var(--paper);}
+  .join .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;}
+  .join .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1);}
+
+  /* ---------------- FOOTER ---------------- */
+  footer{background:var(--ink);color:rgba(247,242,232,.6);padding:80px 5vw 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr .8fr .8fr 1fr;gap:50px;padding-bottom:60px;border-bottom:1px solid rgba(247,242,232,.1);}
+  .foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .foot-brand .chakra{width:30px;height:30px;}
+  .foot-brand b{font-family:'Fraunces',serif;color:var(--paper);font-size:1.05rem;}
+  footer p.desc{font-size:.9rem;line-height:1.7;max-width:320px;}
+  footer h4{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;font-size:.7rem;letter-spacing:.1em;color:var(--gold);margin-bottom:20px;}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  footer ul a{font-size:.88rem;transition:color .2s ease;}
+  footer ul a:hover{color:var(--paper);}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:26px;font-size:.78rem;flex-wrap:wrap;gap:12px;}
+  .foot-bottom .social{display:flex;gap:16px;}
+  .foot-bottom .social a{width:34px;height:34px;border:1px solid rgba(247,242,232,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s ease;}
+  .foot-bottom .social a:hover{border-color:var(--blood-bright);color:var(--blood-bright);}
+
+  /* ---------------- REVEAL ANIM ---------------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .hero-copy .eyebrow .dot{animation:none;}
+  }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width:1080px){
+    .mission{grid-template-columns:1fr;}
+    .mission-tag{position:static;margin-bottom:20px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .camp-grid{grid-template-columns:repeat(2,1fr);}
+    .bt-grid{grid-template-columns:repeat(4,1fr);}
+    .honor-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:760px){
+    nav.links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-3d{height:340px;order:-1;}
+    .process-grid{grid-template-columns:1fr;gap:40px;}
+    .process-grid::before{display:none;}
+    .camp-grid{grid-template-columns:1fr;}
+    .bt-grid{grid-template-columns:repeat(4,1fr);}
+    .stats{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;gap:36px;}
+    .section-head{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<header id="siteHeader">
+  <a href="#top" class="brand">
+    <img src="assets/logo.jpg" alt="Dr. B.R. Ambedkar Blood Donors Association logo" class="logo-img">
+    <div class="brand-text">
+      <b>Dr. B.R. Ambedkar</b>
+      <span>Blood Donors Association</span>
+    </div>
+  </a>
+  <nav class="links">
+    <a href="#mission">Mission</a>
+    <a href="#camps">Camps</a>
+    <a href="#process">Donate</a>
+    <a href="#network">Blood Bank</a>
+    <a href="#honor">Voices</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="request.html" class="btn btn-ghost">Request Blood</a>
+    <a href="register.html" class="btn btn-primary">Register as Donor</a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-copy reveal in">
+      <div class="eyebrow"><span class="dot"></span> Head Office: Jalandhar, Punjab · Serving India, New Zealand &amp; the United Kingdom</div>
+      <h1>Every drop carries<br><em>no caste, no creed —</em><br>only life.</h1>
+      <p class="lede">A community of volunteer donors organising emergency blood camps, matching donors with patients in real time, and honouring the men and women who show up — again and again — inspired by Dr. B.R. Ambedkar's call to serve society. Headquartered in Jalandhar, Punjab, with chapters and donor networks active across India and among the diaspora in New Zealand and the United Kingdom.</p>
+      <div class="hero-actions">
+        <a href="register.html" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.1C1 10.1 1.6 6.6 4.6 5.1c2.5-1.25 5 .1 6.4 2.2C12.4 5.2 14.9 3.85 17.4 5.1c3 1.5 3.6 5 1.9 7.8C15.7 16.65 12 21 12 21z"/></svg>
+          Register as Donor
+        </a>
+        <a href="request.html" class="btn btn-ghost">Request Blood</a>
+      </div>
+      <div class="hero-ticker">
+        <div><span class="num">03</span><span class="lbl">Countries Served</span></div>
+        <div><span class="num">24/7</span><span class="lbl">Emergency Line</span></div>
+        <div><span class="num">8</span><span class="lbl">Blood Groups Tracked</span></div>
+        <div><span class="num">100%</span><span class="lbl">Voluntary, Unpaid</span></div>
+      </div>
+    </div>
+    <div class="hero-3d reveal in">
+      <canvas id="drop-canvas"></canvas>
+      <div class="hero-3d-caption">drag to rotate — the living drop</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MISSION ========== -->
+<section class="mission" id="mission">
+  <div class="mission-tag reveal">
+    <div class="eyebrow">Our Compass</div>
+    <svg class="chakra-lg" viewBox="0 0 100 100"><g fill="none" stroke="#af1626" stroke-width="2.5"><circle cx="50" cy="50" r="42"/><g id="spokesLg"></g><circle cx="50" cy="50" r="6" fill="#af1626" stroke="none"/></g></svg>
+  </div>
+  <div class="reveal">
+    <p class="mission-quote"><span class="mark">"Educate. Agitate. Organize."</span> — Dr. B.R. Ambedkar's call to collective action is our operating manual. We educate communities on the science and safety of donation, we agitate against the stigma and myths that keep people away, and we organize the camps, the registries, and the phone trees that get blood to a patient in time — from our head office in Jalandhar to donor networks across India, New Zealand, and the United Kingdom.</p>
+    <p class="mission-sub">We are not a hospital and we are not a blood bank — we are the volunteer network in between. When a family anywhere in our network needs a rare unit at 2 a.m., our job is to already know who has it, and to have earned enough trust that they pick up the phone.</p>
+    <div class="mission-slogan">
+      <span>रक्तदान</span><span>महादान</span><span>Blood donation is the greatest donation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS ========== -->
+<section class="stats">
+  <div class="stat-card reveal">
+    <div class="num">03 <small>countries</small></div>
+    <div class="lbl">Head office in Jalandhar, Punjab, with volunteers and donor networks active across India, New Zealand, and the United Kingdom.</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">B+ <small>most requested</small></div>
+    <div class="lbl">Our registry is organised by blood group first, so the rarest matches are never the ones we scramble for.</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">24 <small>hrs</small></div>
+    <div class="lbl">Our emergency helpline runs day and night — a request never waits for office hours.</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">0 <small>rupees</small></div>
+    <div class="lbl">Every donation, every camp, every honour we give is voluntary. No donor is ever paid, no patient is ever charged.</div>
+  </div>
+  <div class="stat-note">Figures reflect the association's current chapters and operating model — update with your verified camp &amp; donor counts before publishing.</div>
+</section>
+
+<!-- ========== CAMPS ========== -->
+<section class="camps" id="camps">
+  <div class="section-head reveal">
+    <div>
+      <div class="eyebrow">Upcoming</div>
+      <h2>Blood donation camps this season</h2>
+    </div>
+    <p>Walk in, register your blood group, and donate under medical supervision. Every camp is free to attend and open to all.</p>
+  </div>
+  <div class="camp-grid">
+    <div class="camp-card reveal" data-tilt>
+      <div class="camp-status"><span class="dot"></span>Registrations open</div>
+      <h3>World Blood Donor Day Camp</h3>
+      <div class="loc">Jalandhar, Punjab</div>
+      <div class="camp-meta">
+        <div><span>Date</span><span>14 June</span></div>
+        <div><span>Slots</span><span>7 AM – 2 PM</span></div>
+        <div><span>Venue</span><span>Community Hall</span></div>
+      </div>
+      <div class="cta-row"><a href="register.html">Reserve a slot <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+    <div class="camp-card reveal" data-tilt>
+      <div class="camp-status"><span class="dot"></span>Registrations open</div>
+      <h3>Mohali Youth Donor Drive</h3>
+      <div class="loc">Mohali, Punjab</div>
+      <div class="camp-meta">
+        <div><span>Date</span><span>Monthly</span></div>
+        <div><span>Slots</span><span>9 AM – 4 PM</span></div>
+        <div><span>Venue</span><span>Sector Civic Centre</span></div>
+      </div>
+      <div class="cta-row"><a href="register.html">Reserve a slot <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+    <div class="camp-card reveal" data-tilt>
+      <div class="camp-status"><span class="dot"></span>By request</div>
+      <h3>Emergency Mobile Camp</h3>
+      <div class="loc">On request, anywhere in Punjab</div>
+      <div class="camp-meta">
+        <div><span>Trigger</span><span>Hospital shortage</span></div>
+        <div><span>Response</span><span>Within hours</span></div>
+        <div><span>Team</span><span>Volunteer-run</span></div>
+      </div>
+      <div class="cta-row"><a href="request.html">Request blood now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="process" id="process">
+  <div class="section-head reveal">
+    <div>
+      <div class="eyebrow" style="color:var(--blood)">How it works</div>
+      <h2 style="color:var(--ink)">From registration to recovery, in four steps</h2>
+    </div>
+    <p>The process is deliberately simple — because in an emergency, simple is what saves time.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-no">01</div>
+      <h3>Register</h3>
+      <p>Share your blood group, contact number, and city. You join the registry that hospitals and families call in an emergency.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-no">02</div>
+      <h3>Get matched</h3>
+      <p>When a request comes in, we check eligibility, distance, and last donation date before we ever pick up the phone.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-no">03</div>
+      <h3>Donate safely</h3>
+      <p>A quick health screening, a supervised donation of about 10 minutes, and rest with refreshments — every time.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-no">04</div>
+      <h3>Be honoured</h3>
+      <p>Frequent donors are recognised at our camps — a small thank-you for a decision that isn't small at all.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLOOD NETWORK ========== -->
+<section class="network" id="network">
+  <div class="section-head reveal">
+    <div>
+      <div class="eyebrow">The Registry</div>
+      <h2>Eight blood groups. One shared responsibility.</h2>
+    </div>
+    <p>Our donor registry is organised by group, so a rare request is met with a name, not a scramble.</p>
+  </div>
+  <div class="bt-grid">
+    <div class="bt-card reveal"><div class="bt">A+</div><div class="lbl">Common</div></div>
+    <div class="bt-card reveal"><div class="bt">A−</div><div class="lbl">Needed</div></div>
+    <div class="bt-card reveal"><div class="bt">B+</div><div class="lbl">Common</div></div>
+    <div class="bt-card reveal"><div class="bt">B−</div><div class="lbl">Rare</div></div>
+    <div class="bt-card reveal"><div class="bt">AB+</div><div class="lbl">Universal recipient</div></div>
+    <div class="bt-card reveal"><div class="bt">AB−</div><div class="lbl">Rare</div></div>
+    <div class="bt-card reveal"><div class="bt">O+</div><div class="lbl">Most requested</div></div>
+    <div class="bt-card reveal"><div class="bt">O−</div><div class="lbl">Universal donor</div></div>
+  </div>
+</section>
+
+<!-- ========== HONOR WALL ========== -->
+<section class="honor" id="honor">
+  <div class="section-head reveal">
+    <div>
+      <div class="eyebrow" style="color:var(--blood)">Voices from the registry</div>
+      <h2 style="color:var(--ink)">Donors, patients, and volunteers</h2>
+    </div>
+    <p>Every camp report becomes a story. Here are a few, shared with permission.</p>
+  </div>
+  <div class="honor-grid">
+    <div class="honor-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="quote">I was nervous before my first donation. The volunteers walked me through every step and made it feel completely routine.</p>
+      <div class="who"><div class="avatar">R</div><div><div class="name">First-time donor</div><div class="tag">Jalandhar chapter</div></div></div>
+    </div>
+    <div class="honor-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="quote">When my family needed a unit overnight, the association had a matched donor at the hospital before we'd finished the paperwork.</p>
+      <div class="who"><div class="avatar">S</div><div><div class="name">Patient's family</div><div class="tag">Mohali chapter</div></div></div>
+    </div>
+    <div class="honor-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="quote">It's not just collection — the awareness drives in our village are slowly changing minds that were closed to donation for years.</p>
+      <div class="who"><div class="avatar">V</div><div><div class="name">Volunteer coordinator</div><div class="tag">Field team</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== JOIN / MEMBERSHIP ========== -->
+<section class="join" id="join">
+  <div class="join-inner reveal">
+    <div class="eyebrow">Become a member</div>
+    <h2>Your blood group might be someone's only chance tonight.</h2>
+    <p>Membership takes two minutes. It puts your name, your blood group, and your city into a registry that only exists to save lives — never sold, never spammed.</p>
+    <div class="join-actions">
+      <a href="register.html" class="btn btn-primary">Get Membership</a>
+      <a href="request.html" class="btn btn-ghost">Request Blood Urgently</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">
+        <img src="assets/logo.jpg" alt="Dr. B.R. Ambedkar Blood Donors Association logo" class="logo-img">
+        <b>Dr. B.R. Ambedkar Blood Donors Association</b>
+      </div>
+      <p class="desc">A volunteer-run community organisation headquartered in Jalandhar, Punjab, organising blood donation camps, connecting donors with patients, and promoting social welfare in the spirit of Dr. Ambedkar's vision of equality and service — with donor networks active across India, New Zealand, and the United Kingdom.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#mission">Our mission</a></li>
+        <li><a href="#camps">Upcoming camps</a></li>
+        <li><a href="register.html">Register as donor</a></li>
+        <li><a href="request.html">Request blood</a></li>
+        <li><a href="#honor">Donor stories</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Where we operate</h4>
+      <ul>
+        <li>Head Office — Jalandhar, Punjab</li>
+        <li>Chapters across India</li>
+        <li>New Zealand</li>
+        <li>United Kingdom</li>
+        <li><a href="#join">Start a chapter →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>Emergency helpline — 24/7</li>
+        <li>General enquiries by email</li>
+        <li><a href="register.html">Get membership →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Dr. B.R. Ambedkar Blood Donors Association · Community-run, not-for-profit</span>
+    <div class="social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="#" aria-label="WhatsApp">✆</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // ---- draw Ashoka-chakra style spokes into the inline SVGs ----
+  function drawSpokes(id, r1, r2){
+    const g = document.getElementById(id);
+    if(!g) return;
+    for(let i=0;i<24;i++){
+      const a = (i/24)*Math.PI*2;
+      const x1 = 50+Math.cos(a)*r1, y1 = 50+Math.sin(a)*r1;
+      const x2 = 50+Math.cos(a)*r2, y2 = 50+Math.sin(a)*r2;
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x1);line.setAttribute('y1',y1);
+      line.setAttribute('x2',x2);line.setAttribute('y2',y2);
+      line.setAttribute('stroke-width','1.4');
+      g.appendChild(line);
+    }
+  }
+  drawSpokes('spokesNav', 8, 40);
+  drawSpokes('spokesLg', 8, 40);
+  drawSpokes('spokesFoot', 8, 40);
+
+  // ---- header scroll state ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ---- scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // ---- 3D tilt on camp cards ----
+  document.querySelectorAll('[data-tilt]').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left)/rect.width - .5;
+      const y = (e.clientY - rect.top)/rect.height - .5;
+      card.style.transform = `rotateY(${x*14}deg) rotateX(${-y*14}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+  });
+
+  // ---- THREE.JS: the living drop ----
+  (function(){
+    const canvas = document.getElementById('drop-canvas');
+    if(!canvas || !window.THREE) return;
+    const parent = canvas.parentElement;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, parent.clientWidth/parent.clientHeight, .1, 100);
+    camera.position.set(0, .3, 7);
+
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(parent.clientWidth, parent.clientHeight);
+
+    // teardrop profile via LatheGeometry
+    const pts = [];
+    const N = 40;
+    for(let i=0;i<=N;i++){
+      const t = i/N; // 0 top(tip) -> 1 bottom(round)
+      const y = (1-t)*2.1 - 1.0;
+      // profile function: narrow tip, wide round base
+      const width = Math.pow(t, 0.62) * 1.05 * Math.sin(Math.min(t*1.35,1)*Math.PI*0.5+0.15);
+      pts.push(new THREE.Vector2(Math.max(width,0.0001), y));
+    }
+    const dropGeo = new THREE.LatheGeometry(pts, 48);
+    dropGeo.computeVertexNormals();
+
+    const dropMat = new THREE.MeshPhysicalMaterial({
+      color: 0xaf1626,
+      roughness:.25,
+      metalness:.05,
+      clearcoat:1,
+      clearcoatRoughness:.15,
+      transmission:.08,
+      thickness:1.2,
+      emissive:0x5a0d16,
+      emissiveIntensity:.15,
+    });
+    const drop = new THREE.Mesh(dropGeo, dropMat);
+    drop.rotation.x = Math.PI; // tip up
+    scene.add(drop);
+
+    // orbiting satellite drops = donor network
+    const satGroup = new THREE.Group();
+    scene.add(satGroup);
+    const satMat = new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.4, metalness:.3, emissive:0x3a2c05, emissiveIntensity:.3});
+    const sats = [];
+    const satCount = 8;
+    for(let i=0;i<satCount;i++){
+      const s = new THREE.Mesh(new THREE.SphereGeometry(.07,16,16), satMat);
+      const angle = (i/satCount)*Math.PI*2;
+      const radius = 2.5;
+      s.userData = {angle, radius, speed: .15 + Math.random()*.1, tilt: (Math.random()-0.5)*.6};
+      satGroup.add(s);
+      sats.push(s);
+    }
+
+    // faint ring
+    const ringGeo = new THREE.TorusGeometry(2.5, .004, 8, 120);
+    const ringMat = new THREE.MeshBasicMaterial({color:0xf7f2e8, transparent:true, opacity:.12});
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI/2 + .15;
+    scene.add(ring);
+
+    // lights
+    scene.add(new THREE.AmbientLight(0x223355, .7));
+    const key = new THREE.PointLight(0xffffff, 1.6, 20);
+    key.position.set(3,4,5);
+    scene.add(key);
+    const rim = new THREE.PointLight(0xc9a227, 1.1, 20);
+    rim.position.set(-4,-2,-3);
+    scene.add(rim);
+    const fill = new THREE.PointLight(0xe2394a, .8, 20);
+    fill.position.set(-2,3,4);
+    scene.add(fill);
+
+    // interaction: drag to rotate
+    let dragging=false, lastX=0, lastY=0;
+    let rotY=0, rotX=0, targetRotY=0, targetRotX=0;
+    canvas.addEventListener('pointerdown', e=>{dragging=true; lastX=e.clientX; lastY=e.clientY;});
+    window.addEventListener('pointerup', ()=>dragging=false);
+    window.addEventListener('pointermove', e=>{
+      if(!dragging) return;
+      const dx = e.clientX-lastX, dy = e.clientY-lastY;
+      targetRotY += dx*.006;
+      targetRotX += dy*.004;
+      lastX = e.clientX; lastY = e.clientY;
+    });
+
+    let t0 = performance.now();
+    function animate(){
+      requestAnimationFrame(animate);
+      const t = (performance.now()-t0)/1000;
+
+      rotY += (targetRotY - rotY)*.08;
+      rotX += (targetRotX - rotX)*.08;
+
+      const heartbeat = 1 + Math.sin(t*2.1)*0.028 + Math.max(0,Math.sin(t*2.1*4))*0.02;
+      drop.scale.set(heartbeat, heartbeat*1.02, heartbeat);
+      drop.rotation.y = t*0.35 + rotY;
+      drop.rotation.z = Math.sin(t*.5)*.05 + rotX*.3;
+
+      satGroup.rotation.y = t*0.18 + rotY*.6;
+      sats.forEach((s,i)=>{
+        const a = s.userData.angle + t*s.userData.speed;
+        s.position.set(Math.cos(a)*s.userData.radius, Math.sin(t*.6+i)*s.userData.tilt, Math.sin(a)*s.userData.radius);
+      });
+      ring.rotation.z = t*0.05;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', ()=>{
+      const w = parent.clientWidth, h = parent.clientHeight;
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+      renderer.setSize(w,h);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register as a Blood Donor — Dr. B.R. Ambedkar Blood Donors Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1b33; --ink-soft:#14294d;
+    --blood:#af1626; --blood-bright:#e2394a; --blood-deep:#7a0f1c;
+    --paper:#f7f2e8; --paper-dim:#efe7d8;
+    --gold:#c9a227;
+    --text-on-paper:#191307; --text-dim:#5c5344;
+    --ok:#2e7d4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--text-on-paper);font-family:'Inter',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,.display{font-family:'Fraunces',serif;letter-spacing:-.01em;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:500;}
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 5vw;background:var(--ink);
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:var(--paper);}
+  .brand .chakra{width:28px;height:28px;flex-shrink:0;}
+  .brand .logo-img{width:38px;height:38px;flex-shrink:0;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);}
+  .brand-text{display:flex;flex-direction:column;line-height:1.05;}
+  .brand-text b{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;}
+  .brand-text span{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;}
+  header nav{display:flex;gap:24px;align-items:center;}
+  header nav a{color:var(--paper);opacity:.8;font-size:.85rem;font-weight:500;}
+  header nav a:hover{opacity:1;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.85rem;padding:11px 20px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:transform .2s ease, background .2s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--blood);color:#fff;}
+  .btn-primary:hover{background:var(--blood-bright);}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(247,242,232,.35);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:rgba(25,19,7,.25);}
+  .btn-outline:hover{border-color:var(--blood);color:var(--blood);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+  .page-hero{
+    background:radial-gradient(120% 100% at 20% 0%, #14294d 0%, #0b1b33 55%, #071224 100%);
+    color:var(--paper);padding:80px 5vw 60px;
+  }
+  .page-hero .eyebrow{color:var(--gold);margin-bottom:16px;}
+  .page-hero h1{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:600;max-width:700px;margin-bottom:16px;}
+  .page-hero p{max-width:600px;color:rgba(247,242,232,.72);line-height:1.65;font-size:1.02rem;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:70px 5vw 120px;}
+
+  .id-explain{
+    background:var(--paper-dim);border:1px solid rgba(25,19,7,.12);border-radius:8px;
+    padding:26px 28px;margin-bottom:50px;display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .id-explain .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blood);flex:0 0 140px;padding-top:4px;}
+  .id-explain .body{flex:1;min-width:260px;}
+  .id-explain h3{font-size:1.05rem;margin-bottom:8px;font-family:'Fraunces',serif;font-weight:600;}
+  .id-explain p{font-size:.9rem;color:var(--text-dim);line-height:1.6;}
+  .id-parts{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+  .id-parts span{padding:6px 10px;border-radius:4px;background:var(--paper);border:1px solid rgba(25,19,7,.15);}
+  .id-parts span b{display:block;font-size:.6rem;color:var(--blood);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;font-weight:600;}
+
+  form{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field.full{grid-column:1/-1;}
+  label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);}
+  label .req{color:var(--blood);}
+  input,select,textarea{
+    font-family:'Inter',sans-serif;font-size:.95rem;padding:13px 14px;border-radius:4px;
+    border:1px solid rgba(25,19,7,.22);background:#fff;color:var(--text-on-paper);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blood);box-shadow:0 0 0 3px rgba(175,22,38,.12);}
+  small.hint{font-size:.75rem;color:var(--text-dim);}
+  .checkbox-row{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--text-dim);}
+  .checkbox-row input{width:16px;height:16px;margin-top:2px;flex-shrink:0;}
+  .error-msg{color:var(--blood);font-size:.78rem;display:none;}
+  .field.invalid input,.field.invalid select{border-color:var(--blood);}
+  .field.invalid .error-msg{display:block;}
+
+  .submit-row{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:16px;}
+  .submit-note{font-size:.78rem;color:var(--text-dim);max-width:380px;}
+
+  /* success panel */
+  .success{
+    display:none;background:var(--ink);color:var(--paper);border-radius:10px;
+    padding:44px 40px;margin-top:10px;position:relative;overflow:hidden;
+  }
+  .success.show{display:block;}
+  .success::before{content:'';position:absolute;inset:0;background:linear-gradient(140deg, rgba(175,22,38,.25), transparent 60%);}
+  .success > *{position:relative;z-index:1;}
+  .success .eyebrow{color:var(--gold);margin-bottom:14px;}
+  .success h2{font-size:1.7rem;font-weight:600;margin-bottom:8px;}
+  .success p{color:rgba(247,242,232,.7);font-size:.92rem;margin-bottom:26px;max-width:520px;}
+  .id-display{
+    display:inline-flex;align-items:center;gap:16px;background:rgba(247,242,232,.06);
+    border:1px solid rgba(247,242,232,.2);border-radius:8px;padding:18px 26px;margin-bottom:28px;
+  }
+  .id-display .big{font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:600;letter-spacing:.08em;color:var(--gold);}
+  .id-display button{
+    font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;color:var(--paper);
+    background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.25);border-radius:4px;
+    padding:8px 14px;cursor:pointer;
+  }
+  .id-display button:hover{background:rgba(247,242,232,.18);}
+  .notify-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .notify-row a{
+    display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;
+    padding:12px 20px;border-radius:4px;border:1px solid rgba(247,242,232,.3);color:var(--paper);
+  }
+  .notify-row a.whatsapp{background:#25d366;color:#04331b;border-color:#25d366;}
+  .notify-row a:hover{transform:translateY(-2px);}
+
+  footer{background:var(--ink);color:rgba(247,242,232,.5);padding:36px 5vw;text-align:center;font-size:.8rem;}
+  footer a:hover{color:var(--paper);}
+
+  @media (max-width:720px){
+    form{grid-template-columns:1fr;}
+    header nav{display:none;}
+    .id-explain .tag{flex-basis:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <img src="assets/logo.jpg" alt="Dr. B.R. Ambedkar Blood Donors Association logo" class="logo-img">
+    <div class="brand-text"><b>Dr. B.R. Ambedkar</b><span>Blood Donors Association</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="request.html">Request Blood</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="eyebrow">Join the registry</div>
+  <h1>Register as a blood donor</h1>
+  <p>Two minutes of your time now could be someone's only chance later. Fill in your details once — we'll do the matching when it matters.</p>
+</section>
+
+<div class="wrap">
+
+  <div class="id-explain">
+    <div class="tag">Your donor ID</div>
+    <div class="body">
+      <h3>How your unique ID is built</h3>
+      <p>The moment you register, we generate a permanent ID from your details so every camp and every phone call can find your record instantly.</p>
+      <div class="id-parts">
+        <span><b>1–2</b>First 2 letters of name</span>
+        <span><b>3–4</b>Blood group</span>
+        <span><b>5–6</b>Age</span>
+        <span><b>7–9</b>Serial no. (001, 002…)</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="donorForm" novalidate>
+    <div class="field">
+      <label>Full name <span class="req">*</span></label>
+      <input type="text" name="name" required placeholder="e.g. Ravi Kumar">
+      <span class="error-msg">Please enter your full name.</span>
+    </div>
+    <div class="field">
+      <label>Age <span class="req">*</span></label>
+      <input type="number" name="age" min="18" max="65" required placeholder="18–65">
+      <span class="error-msg">You must be between 18 and 65 to donate.</span>
+    </div>
+    <div class="field">
+      <label>Blood group <span class="req">*</span></label>
+      <select name="bloodGroup" required>
+        <option value="">Select blood group</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option>
+        <option>O+</option><option>O-</option>
+        <option>Not sure</option>
+      </select>
+      <span class="error-msg">Please select your blood group.</span>
+    </div>
+    <div class="field">
+      <label>Mobile number <span class="req">*</span></label>
+      <input type="tel" name="mobile" required placeholder="10-digit mobile number">
+      <span class="error-msg">Enter a valid 10-digit mobile number.</span>
+    </div>
+    <div class="field">
+      <label>Area / locality <span class="req">*</span></label>
+      <input type="text" name="area" required placeholder="e.g. Model Town">
+      <span class="error-msg">Please enter your area or locality.</span>
+    </div>
+    <div class="field">
+      <label>City <span class="req">*</span></label>
+      <input type="text" name="city" required placeholder="e.g. Jalandhar">
+      <span class="error-msg">Please enter your city.</span>
+    </div>
+    <div class="field">
+      <label>Country <span class="req">*</span></label>
+      <select name="country" required>
+        <option value="">Select country</option>
+        <option>India</option>
+        <option>New Zealand</option>
+        <option>United Kingdom</option>
+        <option>Other</option>
+      </select>
+      <span class="error-msg">Please select your country.</span>
+    </div>
+    <div class="field">
+      <label>Nearest hospital <span class="req">*</span></label>
+      <input type="text" name="hospital" required placeholder="e.g. Civil Hospital">
+      <span class="error-msg">Please enter your nearest hospital.</span>
+    </div>
+    <div class="field">
+      <label>Emergency contact name <span class="req">*</span></label>
+      <input type="text" name="emName" required placeholder="Name of a contact person">
+      <span class="error-msg">Please enter an emergency contact name.</span>
+    </div>
+    <div class="field full">
+      <label>Emergency contact number <span class="req">*</span></label>
+      <input type="tel" name="emMobile" required placeholder="10-digit mobile number">
+      <span class="error-msg">Enter a valid 10-digit emergency contact number.</span>
+      <small class="hint">Someone we can reach if we can't reach you directly.</small>
+    </div>
+
+    <div class="field full">
+      <label class="checkbox-row" style="text-transform:none;letter-spacing:normal;font-family:'Inter',sans-serif;">
+        <input type="checkbox" name="consent" required>
+        I confirm I am medically fit to donate blood and agree to be contacted by the association for donation requests and camp updates.
+      </label>
+    </div>
+
+    <div class="submit-row">
+      <p class="submit-note">Your details go straight into our donor registry and are only used to contact you for genuine blood requests and camps.</p>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Register as Donor</button>
+    </div>
+  </form>
+
+  <div class="success" id="successPanel">
+    <div class="eyebrow">Registration complete</div>
+    <h2>Welcome to the registry, <span id="successName"></span>.</h2>
+    <p>Save this ID — quote it any time you call, message, or visit a camp so our volunteers can pull up your record instantly.</p>
+    <div class="id-display">
+      <div class="big" id="generatedId">—</div>
+      <button type="button" id="copyIdBtn">Copy ID</button>
+    </div>
+    <div class="notify-row">
+      <a href="#" id="whatsappNotify" class="whatsapp" target="_blank" rel="noopener">Send us your details on WhatsApp</a>
+      <a href="#" id="emailNotify" class="btn-outline" style="border:1px solid rgba(247,242,232,.3);">Email us your details</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html">← Back to home</a> · Dr. B.R. Ambedkar Blood Donors Association — Head Office: Jalandhar, Punjab · India · New Zealand · United Kingdom
+</footer>
+
+<script>
+  // ====== EDIT THESE TWO LINES WITH YOUR REAL CONTACT DETAILS ======
+  const ADMIN_EMAIL = "andyhusy3@gmail.com.com";
+  const ADMIN_WHATSAPP = "+447377771225"; // country code + number, digits only, no + or spaces
+  // ===================================================================
+
+  function drawSpokes(id){
+    const g = document.getElementById(id); if(!g) return;
+    for(let i=0;i<24;i++){
+      const a=(i/24)*Math.PI*2, x1=50+Math.cos(a)*8, y1=50+Math.sin(a)*8, x2=50+Math.cos(a)*40, y2=50+Math.sin(a)*40;
+      const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x1);line.setAttribute('y1',y1);line.setAttribute('x2',x2);line.setAttribute('y2',y2);line.setAttribute('stroke-width','1.4');
+      g.appendChild(line);
+    }
+  }
+  drawSpokes('spokesNav');
+
+  function onlyLetters(s){ return (s||'').replace(/[^a-zA-Z]/g,'').toUpperCase(); }
+  function onlyDigits(s){ return (s||'').replace(/\D/g,''); }
+
+  async function nextSerial() {
+    let n = localStorage.getItem("donor-serial-counter");
+
+    if (n === null) {
+        n = 1;
+    } else {
+        n = parseInt(n, 10) + 1;
+    }
+
+    localStorage.setItem("donor-serial-counter", n);
+
+    return n;
+}
+
+  function buildId(name, bloodGroup, age, serial){
+    const n = (onlyLetters(name)+'XX').slice(0,2);
+    const bg = ((bloodGroup||'').toUpperCase().replace(/[^A-Z+\-]/g,'')+'XX').slice(0,2);
+    const a = String(age).padStart(2,'0').slice(-2);
+    const s = String(serial).padStart(3,'0');
+    return n+bg+a+s;
+  }
+
+  const form = document.getElementById('donorForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function validateField(field, valid){
+    field.closest('.field') && field.closest('.field').classList.toggle('invalid', !valid);
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = data.get('name').trim();
+    const age = parseInt(data.get('age'),10);
+    const bloodGroup = data.get('bloodGroup');
+    const mobile = data.get('mobile').trim();
+    const area = data.get('area').trim();
+    const city = data.get('city').trim();
+    const country = data.get('country');
+    const hospital = data.get('hospital').trim();
+    const emName = data.get('emName').trim();
+    const emMobile = data.get('emMobile').trim();
+    const consent = data.get('consent');
+
+    let ok = true;
+    ok = validateField(form.name, name.length>1) && ok;
+    ok = validateField(form.age, age>=18 && age<=65) && ok;
+    ok = validateField(form.bloodGroup, !!bloodGroup) && ok;
+    ok = validateField(form.mobile, /^\d{10}$/.test(onlyDigits(mobile))) && ok;
+    ok = validateField(form.area, area.length>1) && ok;
+    ok = validateField(form.city, city.length>1) && ok;
+    ok = validateField(form.country, !!country) && ok;
+    ok = validateField(form.hospital, hospital.length>1) && ok;
+    ok = validateField(form.emName, emName.length>1) && ok;
+    ok = validateField(form.emMobile, /^\d{10}$/.test(onlyDigits(emMobile))) && ok;
+    if(!consent){ ok=false; }
+
+    if(!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Registering…';
+
+    const serial = await nextSerial();
+    const id = buildId(name, bloodGroup, age, serial);
+
+    const record = {
+      id, name, age, bloodGroup, mobile: onlyDigits(mobile), area, city, country, hospital,
+      emergencyContactName: emName, emergencyContactMobile: onlyDigits(emMobile),
+      registeredAt: new Date().toISOString()
+    };
+
+    try{
+      await window.storage.set('donor:'+id, JSON.stringify(record), true);
+    }catch(err){
+      console.error('Could not save registration', err);
+    }
+
+    const summary = `New donor registered ✅
+ID: ${id}
+Name: ${name}
+Age: ${age}
+Blood group: ${bloodGroup}
+Mobile: ${mobile}
+Area: ${area}, ${city}, ${country}
+Nearest hospital: ${hospital}
+Emergency contact: ${emName} (${emMobile})`;
+
+    document.getElementById('whatsappNotify').href = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(summary)}`;
+    document.getElementById('emailNotify').href = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent('New Blood Donor Registration: '+id)}&body=${encodeURIComponent(summary)}`;
+
+    document.getElementById('successName').textContent = name;
+    document.getElementById('generatedId').textContent = id;
+    document.getElementById('successPanel').classList.add('show');
+    document.getElementById('successPanel').scrollIntoView({behavior:'smooth', block:'start'});
+
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Register as Donor';
+  });
+
+  document.getElementById('copyIdBtn').addEventListener('click', ()=>{
+    const id = document.getElementById('generatedId').textContent;
+    navigator.clipboard && navigator.clipboard.writeText(id);
+    const btn = document.getElementById('copyIdBtn');
+    const old = btn.textContent; btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent=old, 1500);
+  });
+</script>
+</body>
+</html>
